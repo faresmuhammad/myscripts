@@ -57,6 +57,12 @@ sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=compose
 echo "Done Composer"
 echo "-------------------------------------------------------"
 
+echo "Installing PHP Extensions: xml, mbstring, zip, gd"
+
+sudo dnf install php-xml php-mbstring php-zip php-gd -y
+
+echo "Done PHP Extensions"
+# echo "-------------------------------------------------------"
 
 echo "-------------------------------------------------------"
 echo "Tasks after installation"
