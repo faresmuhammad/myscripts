@@ -57,12 +57,18 @@ sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=compose
 echo "Done Composer"
 echo "-------------------------------------------------------"
 
-echo "Installing PHP Extensions: xml, mbstring, zip, gd"
+echo "Installing PHP Extensions: xml, mbstring, zip, gd, mysql"
 
-sudo dnf install php-xml php-mbstring php-zip php-gd -y
+sudo dnf install php-xml php-mbstring php-zip php-gd php-mysqlnd -y
 
 echo "Done PHP Extensions"
-# echo "-------------------------------------------------------"
+echo "-------------------------------------------------------"
+
+echo "Installing Telegram flatpak..."
+
+flatpak install flathub org.telegram.desktop
+
+echo "Done Telegram"
 
 echo "-------------------------------------------------------"
 echo "Tasks after installation"
@@ -70,4 +76,5 @@ echo "1) Authenticate OneDrive"
 echo "2) Synchronize keepass database from onedrive"
 echo "3) Configure gh"
 echo "4) Verify Composer by composer"
-echo "x) Install XAMPP from https://www.apachefriends.org/
+echo "5) Install XAMPP from https://www.apachefriends.org/"
+echo "6) Install Mailspring from https://www.getmailspring.com/download"
