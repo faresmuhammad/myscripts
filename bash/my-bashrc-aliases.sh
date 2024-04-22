@@ -34,3 +34,4 @@ function gpush () {
 
 
 alias lvi="composer install && npm install"
+alias lvcl="cp .env.example .env && lvi && pa key:generate"
