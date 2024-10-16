@@ -2,14 +2,17 @@
 
 sudo dnf install php-cli unzip curl -y
 
-cd ~
-curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
+EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
 
-HASH=`curl -sS https://composer.github.io/installer.sig`
+if [ "$EXPECTED_SIGNATURE" != "$SIGNATURE" ]
+then
+    echo 'ERROR: Invalid installer signature'
+    rm composer-setup.php
+    exit 1
+fi
 
-php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer
+rm composer-setup.php
 
-sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
-
-echo "----------------------------------"
-echo "run composer to check if composer installed successfully"
