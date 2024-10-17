@@ -5,10 +5,15 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
+echo "Installing neccessary packages for apache server..."
+echo ""
+
+sudo dnf install libxcrypt-compat libnsl -y
+
 read -p "Did you install XAMPP and set the configuration? " xampp
 if [ $xampp == 'y' ]; then
     echo "Installing php extensions...";echo ""
-    sudo dnf install php-cli unzip curl php-zip php-gd php-xml -y
+    sudo dnf install php-cli unzip curl php-zip php-gd php-xml php-mongodb php-soap -y
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
     EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
