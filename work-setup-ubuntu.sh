@@ -5,14 +5,11 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
-echo "Installing neccessary packages for apache server..."
-echo ""
-
 
 read -p "Did you install XAMPP and set the configuration? " xampp
 if [ $xampp == 'y' ]; then
     echo "Installing php extensions...";echo ""
-    sudo gpt install php-cli unzip curl php-zip php-gd php-xml php-mongodb php-soap -y
+    sudo apt install php-cli unzip curl php-zip php-gd php-xml php-mongodb php-soap -y
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
     EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
@@ -33,7 +30,7 @@ fi
 # add other extension or edit the file after installation to add the unrecognized extensions
 
 echo "Installing Some Essential Packages gh, glab, fzf"
-sudo gpt install git gh glab fzf -y
+sudo apt install git gh glab fzf -y
 
 read -p "Did you configure git, gh and glab?" git
 
