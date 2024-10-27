@@ -50,6 +50,7 @@ alias lvcl="cp .env.example .env && lvi && pa key:generate"
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 
 alias fp="fzf --preview 'cat {} | bat --style=numbers --color=always'"
+alias cdf='cd "$(find /home/fares -type d | fzf)"'
 
 alias pbcopy="xsel --clipboard"
 alias pbpaste="xsel --clipboard --output"
